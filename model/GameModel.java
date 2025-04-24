@@ -16,8 +16,11 @@ public class GameModel {
     public String messages;
     public int score;
     public String gamemode;
-    private PlayStrategy strategy = PlayStrategy.NORMAL;
+    //private PlayStrategy strategy = PlayStrategy.NORMAL;
     //private boolean fastModeOn;
+
+    private PlayStrategy strategy = new NormalStrategy();  // default
+
 
     
 
@@ -58,6 +61,19 @@ public class GameModel {
         return false;
     }
 
+    public void setStrategy(PlayStrategy strategy) {
+        this.strategy = strategy;
+    }
+    
+    public PlayStrategy getStrategy() {
+        return strategy;
+    }
+    
+    public int getCurrentDelay() {
+        return strategy.getDelay();
+    }
+    
+
     public boolean snakeGotFood(){
         var food = App.model.food;
         var head = App.model.snake.nodes.get(0);
@@ -88,13 +104,13 @@ public class GameModel {
     //     this.fastModeOn = fastModeOn;
     // }
 
-    public PlayStrategy getStrategy() {
-        return strategy;
-    }
+    // public PlayStrategy getStrategy() {
+    //     return strategy;
+    // }
     
-    public void setStrategy(PlayStrategy strategy) {
-        this.strategy = strategy;
-    }
+    // public void setStrategy(PlayStrategy strategy) {
+    //     this.strategy = strategy;
+    // }
 
 
 }

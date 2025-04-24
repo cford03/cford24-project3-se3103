@@ -5,6 +5,8 @@ import java.awt.event.ItemListener;
 
 import javax.swing.JCheckBox;
 
+import model.FastStrategy;
+import model.NormalStrategy;
 import model.PlayStrategy;
 
 public class GameModeListener implements ItemListener {
@@ -15,9 +17,16 @@ public class GameModeListener implements ItemListener {
         boolean checked = option.isSelected();
 
         
+        App.model.setStrategy(checked ? new FastStrategy() : new NormalStrategy());
+        App.model.gamemode = "Game Mode " + App.model.getStrategy().getName();
+        App.win.updateGameModeLabel(App.model.gamemode);
+        App.timer.setDelay(App.model.getCurrentDelay());
+        
+        
+        App.model.setStrategy(checked ? new FastStrategy() : new NormalStrategy());
 
-        App.model.setStrategy(checked ? PlayStrategy.FAST : PlayStrategy.NORMAL);
-        App.model.gamemode = "Game Mode " + App.model.getStrategy().name();
+
+        App.timer.setDelay(App.model.getCurrentDelay());
         App.timer.setDelay(checked ? 100 : 250);
         App.win.updateGameModeLabel(App.model.gamemode);
 
